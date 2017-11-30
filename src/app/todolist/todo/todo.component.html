@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-md-4">
+    <button (click)="changeStatus()" class="complete">check</button>
+  </div>
+  <div class="col-md-4">
+    <p [ngClass]="{done: item.done}">{{item.text}}</p>
+  </div>
+  <div class="col-md-4">
+    <button (click)="removeTodo()" class="error">remove</button>
+  </div>
+</div>
