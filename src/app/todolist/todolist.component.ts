@@ -35,22 +35,14 @@ export class TodolistComponent implements OnInit {
     this.checkCounter();
   }
 
-  removeTodo(index) {
-    this.todoService.remove(index);
+  removeTodo(id: number) {
+    this.todoService.remove(id);
+    this.todoListShowing = this.todoService.filter();
     this.checkCounter();
   }
 
-  showAll() {
-    this.todoListShowing = this.todoService.todoList;
-  }
-
-  showActive() {
-    this.todoListShowing = this.todoService.showActive();
-  }
-
-
-  showCompleted() {
-    this.todoListShowing = this.todoService.showCompleted();
+  filter(text: string) {
+    this.todoListShowing = this.todoService.filter(text);
   }
 
   totalItems() {

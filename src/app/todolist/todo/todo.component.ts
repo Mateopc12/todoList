@@ -7,7 +7,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class TodoComponent implements OnInit {
   @Input() item: ITodo;
-  @Input() index: number;
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onChange = new EventEmitter();
   // tslint:disable-next-line:no-output-on-prefix
@@ -22,6 +21,6 @@ export class TodoComponent implements OnInit {
   }
 
   removeTodo() {
-    this.onRemove.emit(this.index);
+    this.onRemove.emit(this.item.id);
   }
 }

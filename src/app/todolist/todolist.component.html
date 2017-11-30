@@ -7,14 +7,14 @@
       <input type="text" (keyup)="onKey($event)" [(ngModel)]="newTodo">
     </div>
   </div>
-  <app-todo *ngFor="let item of todoListShowing; let i = $index" [index]="i" [item]="item" (onChange)="changeStatus($event)"
+  <app-todo *ngFor="let item of todoListShowing;" [item]="item" (onChange)="changeStatus($event)"
     (onRemove)="removeTodo($event)">
   </app-todo>
   <br>
   <div [hidden]="totalItems() == 0">
     {{activeResult}} items left
-    <button (click)="showAll()">All</button>
-    <button (click)="showActive()">Active</button>
-    <button (click)="showCompleted()">Completed</button>
+    <button (click)="filter('All')">All</button>
+    <button (click)="filter('Active')">Active</button>
+    <button (click)="filter('Completed')">Completed</button>
   </div>
 </div>

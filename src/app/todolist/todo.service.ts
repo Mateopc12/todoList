@@ -3,18 +3,31 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TodoService {
 
-  private _todoList = [];
-  constructor() { }
+  private _todoList: ITodo[] = [];
+  showing = 'All';
+  constructor() {
+  }
 
-  get todoList(){
+  get todoList() {
     return this._todoList;
   }
 
-  add(text: string) {
-    this._todoList.push({text: text, done: false});
+  private nextId(): number {
+    const idList: number[] = this._todoList.map(i => i.id);
+    if (idList && idList.length > 0) {
+      const currentMaxId = Math.max(...idList);
+      return currentMaxId + 1;
+    }
+
+    return 1;
   }
 
-  remove(index) {
+  add(text: string) {
+    this._todoList.push({ id: this.nextId(), text: text, done: false });
+  }
+
+  remove(id: number) {
+    const index = this._todoList.findIndex(d => d.id === id);
     this._todoList.splice(index, 1);
   }
 
@@ -22,15 +35,19 @@ export class TodoService {
     item.done = true;
   }
 
-  showActive() {
-    return this._todoList.filter(i => i.done === false);
-  }
-
-  showCompleted() {
-    return this._todoList.filter(i => i.done === true);
+  filter(text?: string) {
+    this.showing = text ? text : this.showing;
+    switch (this.showing) {
+      case 'Active':
+        return this._todoList.filter(i => i.done === false);
+      case 'Completed':
+        return this._todoList.filter(i => i.done === true);
+      default:
+      return this._todoList;
+    }
   }
 
   totalItems() {
-    return this._todoList.length;
+    return this._todoList ? this._todoList.length : 0;
   }
 }
