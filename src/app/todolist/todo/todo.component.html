@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4">
-    <button (click)="changeStatus()" class="complete">check</button>
+    <button [ngClass]="{complete: item.done == false, completed: item.done == true}" (click)="changeStatus()" >check</button>
   </div>
   <div class="col-md-4">
     <p [ngClass]="{done: item.done}">{{item.text}}</p>

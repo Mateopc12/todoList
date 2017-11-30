@@ -47,7 +47,15 @@ export class TodoService {
     }
   }
 
-  totalItems() {
-    return this._todoList ? this._todoList.length : 0;
+  completeAll() {
+    this._todoList.map(function(obj) {
+      obj.done = true;
+      return obj;
+    });
   }
+
+  removeCompleted() {
+    this._todoList = this._todoList.filter(i => i.done === false);
+  }
+
 }

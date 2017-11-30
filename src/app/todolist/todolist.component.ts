@@ -19,26 +19,38 @@ export class TodolistComponent implements OnInit {
   }
 
   onKey(event: KeyboardEvent) { // with type info
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && this.newTodo.length > 0) {
       this.todoService.add(this.newTodo);
       this.newTodo = '';
-      this.checkCounter();
+      this.activeResult = this.todoService.todoList.filter(i => i.done === false).length;
     }
   }
 
-  checkCounter() {
+  refreshView() {
+    this.todoListShowing = this.todoService.filter();
     this.activeResult = this.todoService.todoList.filter(i => i.done === false).length;
+  }
+
+
+
+  changeAll() {
+    this.todoService.completeAll();
+    this.refreshView();
+  }
+
+  removeCompleted() {
+    this.todoService.removeCompleted();
+    this.refreshView();
   }
 
   changeStatus(item: ITodo) {
     this.todoService.complete(item);
-    this.checkCounter();
+    this.refreshView();
   }
 
   removeTodo(id: number) {
     this.todoService.remove(id);
-    this.todoListShowing = this.todoService.filter();
-    this.checkCounter();
+    this.refreshView();
   }
 
   filter(text: string) {
@@ -46,7 +58,12 @@ export class TodolistComponent implements OnInit {
   }
 
   totalItems() {
-    return this.todoService.totalItems();
+    return this.todoService.todoList.length;
+  }
+
+  completedItemsCount() {
+    console.log(this.todoService.todoList.filter(i => i.done === true));
+    return this.todoService.todoList.filter(i => i.done === true).length;
   }
 
 }

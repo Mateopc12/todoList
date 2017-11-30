@@ -4,17 +4,23 @@
   </h1>
   <div class="row">
     <div class="col-md-12">
+      <button class="general-button" (click)="changeAll()">CHECK</button>
       <input type="text" (keyup)="onKey($event)" [(ngModel)]="newTodo">
     </div>
+
+
+
   </div>
-  <app-todo *ngFor="let item of todoListShowing;" [item]="item" (onChange)="changeStatus($event)"
-    (onRemove)="removeTodo($event)">
+  <app-todo *ngFor="let item of todoListShowing;" [item]="item" (onChange)="changeStatus($event)" (onRemove)="removeTodo($event)">
   </app-todo>
   <br>
-  <div [hidden]="totalItems() == 0">
-    {{activeResult}} items left
-    <button (click)="filter('All')">All</button>
-    <button (click)="filter('Active')">Active</button>
-    <button (click)="filter('Completed')">Completed</button>
+  <div [hidden]="totalItems() === 0" class="row">
+    <p class="col-md-2">{{activeResult}} items left</p>
+    <button class="col-md-1" (click)="filter('All')">All</button>
+    <button class="col-md-2" (click)="filter('Active')">Active</button>
+    <button class="col-md-3" (click)="filter('Completed')">Completed</button>
+    <div class="col-md-4" class="inline" [hidden]="completedItemsCount() === 0">
+      <button (click)="removeCompleted()">Clear Completed</button>
+    </div>
   </div>
 </div>

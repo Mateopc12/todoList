@@ -3,14 +3,19 @@
 }
 
 button {
-    
     border: none;
-    padding: 15px 32px;
+    padding: 0.5rem;
     text-align: center;
+    vertical-align: text-top;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     border-radius: 10%;
+    width: 50%;
+}
+
+.completed {
+    background-color: rgb(172, 167, 167);
 }
 
 .complete {
