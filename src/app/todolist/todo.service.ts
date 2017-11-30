@@ -39,9 +39,9 @@ export class TodoService {
     this.showing = text ? text : this.showing;
     switch (this.showing) {
       case 'Active':
-        return this._todoList.filter(i => i.done === false);
+        return this._todoList.filter(i => !i.done);
       case 'Completed':
-        return this._todoList.filter(i => i.done === true);
+        return this._todoList.filter(i => i.done);
       default:
       return this._todoList;
     }
@@ -55,7 +55,7 @@ export class TodoService {
   }
 
   removeCompleted() {
-    this._todoList = this._todoList.filter(i => i.done === false);
+    this._todoList = this._todoList.filter(i => !i.done);
   }
 
 }

@@ -22,16 +22,14 @@ export class TodolistComponent implements OnInit {
     if (event.key === 'Enter' && this.newTodo.length > 0) {
       this.todoService.add(this.newTodo);
       this.newTodo = '';
-      this.activeResult = this.todoService.todoList.filter(i => i.done === false).length;
+      this.activeResult = this.todoService.todoList.filter(i => !i.done).length;
     }
   }
 
   refreshView() {
     this.todoListShowing = this.todoService.filter();
-    this.activeResult = this.todoService.todoList.filter(i => i.done === false).length;
+    this.activeResult = this.todoService.todoList.filter(i => !i.done).length;
   }
-
-
 
   changeAll() {
     this.todoService.completeAll();
@@ -62,8 +60,7 @@ export class TodolistComponent implements OnInit {
   }
 
   completedItemsCount() {
-    console.log(this.todoService.todoList.filter(i => i.done === true));
-    return this.todoService.todoList.filter(i => i.done === true).length;
+    return this.todoService.todoList.filter(i => i.done).length;
   }
 
 }
